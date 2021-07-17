@@ -1,24 +1,29 @@
 import React from 'react'
-import { curveNatural, line } from 'd3'
+import { geoEqualEarth, geoPath } from 'd3'
 
-const Marks = ({ data, xScale, yScale, xValue, yValue, tooltipFormat, circleRadius }) => (
+const projection = geoEqualEarth()
+const path = geoPath(projection)
+
+const Marks = ({ data: { countries, interiors } }) => (
   <g className="marks">
     <path //
-      d={line() //
-        .x((d) => xScale(xValue(d)))
-        .y((d) => yScale(yValue(d)))
-        .curve(curveNatural)(data)}
+      // key={feature.id}
+      d={path({ type: 'Sphere' })}
+      className="sphere"
     />
-    {/* {data.map((d) => (
-      <circle //
-        cx={xScale(xValue(d))}
-        cy={yScale(yValue(d))}
-        r={circleRadius}
-        // className="mark"
-      >
-        <title>{tooltipFormat(xValue(d))}</title>
-      </circle>
-    ))} */}
+    {countries.features.map((feature) => (
+      <path //
+        // key={feature.id}
+        d={path(feature)}
+        className="country"
+      />
+    ))}
+
+    <path //
+      // key={feature.id}
+      d={path(interiors)}
+      className="interiors"
+    />
   </g>
 )
 
