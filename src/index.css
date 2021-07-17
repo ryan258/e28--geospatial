@@ -15,7 +15,7 @@ pre {
   font-size: 7em;
 }
 
-.marks .country {
+.marks .land {
   fill: #1c4121;
 }
 
@@ -26,4 +26,9 @@ pre {
 
 .marks .sphere {
   fill: #77a7c0;
+}
+
+.marks .graticules {
+  fill: none;
+  stroke: rgba(185, 185, 185, 0.418);
 }
