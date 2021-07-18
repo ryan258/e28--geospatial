@@ -1,6 +1,7 @@
 import React from 'react'
 import Marks from './components/Marks'
-import { useData } from './hooks/useData'
+import { useWorldAtlas } from './hooks/useWorldAtlas'
+import { useCities } from './hooks/useCities'
 // import { message } from './utils/message'
 // useCallback - good for adding event listeners only once
 // - arg0 - function you want to control
@@ -10,16 +11,19 @@ const width = 960
 const height = 500
 
 const App = () => {
-  const data = useData()
+  const worldAtlas = useWorldAtlas()
+  const cities = useCities()
+  // console.log(cities)
 
-  if (!data) {
+  if (!worldAtlas || !cities) {
     return <pre>'Loading...'</pre>
   }
 
   return (
     <svg width={width} height={height}>
       <Marks //
-        data={data}
+        worldAtlas={worldAtlas}
+        cities={cities}
       />
     </svg>
   )
